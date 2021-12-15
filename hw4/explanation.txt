@@ -1,0 +1,35 @@
+Author: Scott Walters
+CSCI-397
+Assignment 4
+Explanation.txt
+
+For this assignment, I approached the problem over multiple steps. First, I read the documentation 
+for scapy to try to get a feel for how the package worked. After I felt somewhat comforatble with
+the package, I started sniffing packets and observing the output so I could get a clearer vision of
+the packet structure. Then, I started filtering packets, trying to root out only certain destination
+IPs and only DNS queries. For this I used some online resources to look at what port DNS queries were
+typically routed through. Once I was properly filtering DNS queries to certain IP addresses, I started
+looking at how to build response packets. This is where I had the most difficulty understanding
+what fields at each layer needed to be set manually and which would be set automatically. Once I was
+building packets that properly matched the query using the .answers() function, I moved on to testing.
+To test my program I used terminal to launch "dig @<destination IP address> <URL>. While doing this, 
+I ran Wireshark to capture all the DNS queries and responses to see if I could find my spoofed
+packets. At first, I kept seeing a malformed packet error, so I returned and rebuilt the 
+build_response() function. Once I was getting answers from dig and they were registering properly on 
+wireshark, I worked on the IO functionality, taking in and reading a file and interface. Many of the 
+references I used were around actually building responses, the packet and layer structure within
+scapy, filtering packets while sniffing, and understanding dig outputs. 
+
+References:
+https://phoenixnap.com/kb/linux-dig-command-examples
+https://courses.cs.duke.edu/fall16/compsci356/DNS/DNS-primer.pdf 
+http://linux-training.be/networking/ch03.html 
+https://scapy.readthedocs.io/en/latest/usage.html#starting-scapy
+https://github.com/secdev/scapy/blob/master/scapy/packet.py#L1825-L1833
+https://0xbharath.github.io/art-of-packet-crafting-with-scapy/scapy/sniffing/index.html
+https://thepacketgeek.com/scapy/sniffing-custom-actions/part-1/ 
+https://jasonmurray.org/posts/2020/scapydns/ 
+https://www.rfc-editor.org/rfc/rfc1035.html
+https://www.geeksforgeeks.org/packet-sniffing-using-scapy/
+
+
